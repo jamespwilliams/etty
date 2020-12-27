@@ -11,12 +11,17 @@ import (
 )
 
 func main() {
-	if err := run(os.Args[1], os.Args[2]); err != nil {
+	lang := "eng"
+	if len(os.Args) >= 4 {
+		lang = os.Args[3]
+	}
+
+	if err := run(os.Args[1], os.Args[2], lang); err != nil {
 		log.Fatal("ety:", err)
 	}
 }
 
-func run(wordnetPath, word string) error {
+func run(wordnetPath, word, lang string) error {
 	wordnet, err := os.Open(wordnetPath)
 	if err != nil {
 		return fmt.Errorf("failed to open wordnet: %v", err)
@@ -27,7 +32,7 @@ func run(wordnetPath, word string) error {
 		return fmt.Errorf("failed to build etymology tree from wordnet: %v", err)
 	}
 
-	n := ety.Lookup(etymology.Word{Word: word, Language: "eng"})
+	n := ety.Lookup(etymology.Word{Word: word, Language: lang})
 	fmt.Println(formatRoot(n))
 
 	return nil
