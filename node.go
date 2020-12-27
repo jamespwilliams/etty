@@ -26,12 +26,22 @@ func (n SortedNodes) Less(i, j int) bool {
 	ni := n[i].Word.Word
 	nj := n[j].Word.Word
 
-	if ni[0] == '-' {
-		return false
+	niSuffix := ni[0] == '-'
+	njSuffix := nj[0] == '-'
+
+	niPrefix := ni[len(ni)-1] == '-'
+	njPrefix := nj[len(nj)-1] == '-'
+
+	if niSuffix && njSuffix || niPrefix && njPrefix {
+		return ni < nj
 	}
 
-	if ni[len(ni)-1] == '-' {
-		return true
+	if niSuffix || njSuffix {
+		return njSuffix
+	}
+
+	if niPrefix || njPrefix {
+		return niPrefix
 	}
 
 	return ni < nj

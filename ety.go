@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"sort"
 	"strings"
 )
 
@@ -64,12 +65,6 @@ const (
 	RelationDerivedFrom
 )
 
-type Node struct {
-	Word        Word
-	DerivedFrom []Node
-	Etymology   []Node
-}
-
 func (e Etymology) Lookup(word Word) Node {
 	node := Node{
 		Word: word,
@@ -87,15 +82,8 @@ func (e Etymology) Lookup(word Word) Node {
 		}
 	}
 
+	sort.Sort(SortedNodes(node.Etymology))
+	sort.Sort(SortedNodes(node.DerivedFrom))
+
 	return node
-}
-
-func contains(nodes []Node, node Node) bool {
-	for _, n := range nodes {
-		if n.Word == node.Word {
-			return true
-		}
-	}
-
-	return false
 }
