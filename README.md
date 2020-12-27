@@ -48,3 +48,15 @@ microgyfrifiadur (cym)
 │   └── աղերս (xcl)
 └── -იანი (kat)
 ```
+
+The output is coloured nicely, too:
+
+![Screenshot of CLI](https://raw.githubusercontent.com/jamespwilliams/etymology/master/_assets/cli.png)
+
+### Future
+
+I have the vague idea of making a web interface for this, which accepts a word
+and displays an etymological tree for it.
+
+Also, it'd be nice to use more up-to-date etymology information, as mentioned
+earlier.
