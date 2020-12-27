@@ -16,13 +16,13 @@ func contains(nodes []Node, node Node) bool {
 	return false
 }
 
-type SortedNodes []Node
+type sortedNodes []Node
 
-func (n SortedNodes) Len() int {
+func (n sortedNodes) Len() int {
 	return len(n)
 }
 
-func (n SortedNodes) Less(i, j int) bool {
+func (n sortedNodes) Less(i, j int) bool {
 	ni := n[i].Word.Word
 	nj := n[j].Word.Word
 
@@ -47,6 +47,6 @@ func (n SortedNodes) Less(i, j int) bool {
 	return ni < nj
 }
 
-func (n SortedNodes) Swap(i, j int) {
+func (n sortedNodes) Swap(i, j int) {
 	n[i], n[j] = n[j], n[i]
 }

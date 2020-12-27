@@ -82,8 +82,8 @@ func (e Etymology) Lookup(word Word) Node {
 		}
 	}
 
-	sort.Sort(SortedNodes(node.Etymology))
-	sort.Sort(SortedNodes(node.DerivedFrom))
+	sort.Sort(sortedNodes(node.Etymology))
+	sort.Sort(sortedNodes(node.DerivedFrom))
 
 	return node
 }
