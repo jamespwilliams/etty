@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/jamespwilliams/etymology"
+	. "github.com/logrusorgru/aurora"
 )
 
 func main() {
@@ -33,7 +34,7 @@ func run(wordnetPath, word string) error {
 }
 
 func formatRoot(n etymology.Node) string {
-	return format(n, "", false, true)
+	return format(n, "", true, true)
 }
 
 func format(n etymology.Node, indent string, root, lastChild bool) string {
@@ -48,20 +49,20 @@ func format(n etymology.Node, indent string, root, lastChild bool) string {
 		}
 	}
 
-	sb.WriteString(n.Word.Word)
+	sb.WriteString(formatWord(n.Word.Word))
 	sb.WriteString(" (")
-	sb.WriteString(n.Word.Language)
+	sb.WriteString(Magenta(n.Word.Language).String())
 	sb.WriteString(")")
 
-	children := append(n.Etymology, n.DerivedFrom...)
+	children := append(n.Etymology)
 
 	for index, child := range children {
 		childIsLast := index == len(children)-1
 
 		newIndent := indent
-		if !lastChild {
+		if !root && !lastChild {
 			newIndent += "│   "
-		} else {
+		} else if !root {
 			newIndent += "    "
 		}
 
@@ -71,4 +72,16 @@ func format(n etymology.Node, indent string, root, lastChild bool) string {
 	}
 
 	return sb.String()
+}
+
+func formatWord(word string) string {
+	if word[len(word)-1] == '-' {
+		return Yellow(word[:len(word)-1]).String() + "-"
+	}
+
+	if word[0] == '-' {
+		return "-" + Yellow(word[1:]).String()
+	}
+
+	return Yellow(word).String()
 }
