@@ -44,10 +44,6 @@ func New(data io.Reader) (Etymology, error) {
 			Word:     from[1],
 		}
 
-		if components[1] == "rel:is_derived_from" && m[fromWord] != nil {
-			fmt.Println("dupe: ", from)
-		}
-
 		m[fromWord] = append(m[fromWord], Word{
 			Language: to[0],
 			Word:     to[1],
@@ -79,15 +75,27 @@ func (e Etymology) Lookup(word Word) Node {
 		Word: word,
 	}
 
-	for _, derivedFrom := range e.derivedFromEdges[word] {
-		n := e.Lookup(derivedFrom)
-		node.DerivedFrom = append(node.DerivedFrom, n)
-	}
-
 	for _, etym := range e.etymologyEdges[word] {
 		n := e.Lookup(etym)
 		node.Etymology = append(node.Etymology, n)
 	}
 
+	for _, derivedFrom := range e.derivedFromEdges[word] {
+		n := e.Lookup(derivedFrom)
+		if !contains(node.Etymology, n) {
+			node.DerivedFrom = append(node.DerivedFrom, n)
+		}
+	}
+
 	return node
+}
+
+func contains(nodes []Node, node Node) bool {
+	for _, n := range nodes {
+		if n.Word == node.Word {
+			return true
+		}
+	}
+
+	return false
 }
