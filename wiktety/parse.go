@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/jamespwilliams/etymology/wiktety/wiktlang"
+	"github.com/jamespwilliams/etymology/wiktlang"
 )
 
 var titleRemovalRegex = regexp.MustCompile(`Reconstruction:[^:]*/`)

@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/jamespwilliams/etymology/wiktety/wiktlang"
+	"github.com/jamespwilliams/etymology/wiktlang"
 )
 
 func main() {
@@ -18,12 +18,12 @@ type textElem struct {
 }
 
 func run() error {
-	twos, err := os.Open("wiktlang/langs_2.txt")
+	twos, err := os.Open("../wiktlang/langs_2.txt")
 	if err != nil {
 		return err
 	}
 
-	threes, err := os.Open("wiktlang/langs_3.txt")
+	threes, err := os.Open("../wiktlang/langs_3.txt")
 	if err != nil {
 		return err
 	}
