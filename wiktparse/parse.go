@@ -180,6 +180,11 @@ func parseTemplate(template string) []reference {
 		components = append(components, strings.TrimSpace(comp))
 	}
 
+	if len(components) == 0 {
+		println("len(components) was 0?")
+		return nil
+	}
+
 	var refType referenceType
 	switch components[0] {
 	case "pre", "prefix":
@@ -300,6 +305,15 @@ func parseTemplate(template string) []reference {
 		refType = refTypeDerived
 	case "m", "mention":
 		if len(components) < 3 {
+			return nil
+		}
+
+		word := components[2]
+		if word == "" && len(components) >= 4 {
+			word = components[3]
+		}
+
+		if word == "" {
 			return nil
 		}
 
