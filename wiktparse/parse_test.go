@@ -193,3 +193,12 @@ From {{inh|en|enm|nature}}, {{m|enm|natur}}, borrowed from {{bor|en|fro|nature}}
 func TestParseSection6(t *testing.T) {
 	fmt.Println(parseEtymologySection(`From {{suffix|en|πάθος|lang1=grc|t1=suffering|y}}`))
 }
+
+func TestParseSection7(t *testing.T) {
+	fmt.Println(parseEtymologySection(`{{root|en|ine-pro|*h₁eḱ-}}
+	From {{bor|en|la|-}} and {{der|en|NL.|-}} {{m|la|hippopotamus}}, from {{der|en|grc|ἱπποπόταμος}}, from {{m|grc|ἵππος||horse}} (English {{m|en|hippo-}}) + {{m|grc|ποταμός||river}}.`))
+}
+
+func TestParseSection8(t *testing.T) {
+	fmt.Println(parseEtymologySection(`From {{af|grc|ῐ̔́ππος|ποτᾰμός|t1=horse|t2=river}}.`))
+}

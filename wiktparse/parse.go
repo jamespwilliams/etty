@@ -165,7 +165,19 @@ outer:
 }
 
 // parseTemplate takes a template and returns a list of references which that template makes
-func parseTemplate(template string) []reference {
+func parseTemplate(template string) (refs []reference) {
+	defer func() {
+		// TODO: clean this up:
+		var res []reference
+		for _, ref := range refs {
+			if ref.word.word != "-" {
+				res = append(res, ref)
+			}
+		}
+
+		refs = res
+	}()
+
 	template = strings.Trim(template, "{}")
 
 	dirtyComponents := strings.Split(template, "|")
