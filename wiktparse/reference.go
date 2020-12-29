@@ -1,4 +1,4 @@
-package main
+package wiktparse
 
 // TODO: perhaps words/fragments should be represented as being in one of these different categories:
 // - "compound" - composed of prefix/base/suffix - not actually derived/inherited/borrowed, rather

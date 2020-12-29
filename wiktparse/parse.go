@@ -1,4 +1,4 @@
-package main
+package wiktparse
 
 import (
 	"encoding/xml"
@@ -10,9 +10,13 @@ import (
 	"github.com/jamespwilliams/etymology/wiktlang"
 )
 
+type textElem struct {
+	Data string `xml:",chardata"`
+}
+
 var titleRemovalRegex = regexp.MustCompile(`Reconstruction:[^:]*/`)
 
-func parseDump(dump io.Reader, languages wiktlang.Languages) error {
+func ParseDump(dump io.Reader, out io.Writer, languages wiktlang.Languages) error {
 	var currentTitle string
 
 	d := xml.NewDecoder(dump)
@@ -40,7 +44,7 @@ func parseDump(dump io.Reader, languages wiktlang.Languages) error {
 					return fmt.Errorf("error decoding text: %w", err)
 				}
 
-				parseTextTag(currentTitle, text.Data, languages)
+				parseTextTag(out, currentTitle, text.Data, languages)
 			}
 		}
 	}
@@ -48,7 +52,7 @@ func parseDump(dump io.Reader, languages wiktlang.Languages) error {
 	return nil
 }
 
-func parseTextTag(title, text string, languages wiktlang.Languages) {
+func parseTextTag(out io.Writer, title, text string, languages wiktlang.Languages) {
 	var (
 		currentLanguage    string
 		inEtymologySection bool
@@ -84,7 +88,7 @@ func parseTextTag(title, text string, languages wiktlang.Languages) {
 	for lang, section := range sections {
 		refs := parseEtymologySection(section)
 		for _, ref := range unique(refs) {
-			fmt.Printf("%v:%v\trel:%s\t%v:%v\n", lang, title, ref.refType, ref.word.language, ref.word.word)
+			fmt.Fprintf(out, "%v:%v\trel:%s\t%v:%v\n", lang, title, ref.refType, ref.word.language, ref.word.word)
 		}
 	}
 }
