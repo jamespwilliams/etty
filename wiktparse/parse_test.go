@@ -1,6 +1,7 @@
 package wiktparse
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -158,33 +159,37 @@ func TestParseTemplateMentionBlank(t *testing.T) {
 }
 
 func TestParseSimpleSection(t *testing.T) {
-	_ = parseEtymologySection("{{prefix|en|a|biological|t1=without|t2=relating to life}}")
+	fmt.Println(parseEtymologySection("{{prefix|en|a|biological|t1=without|t2=relating to life}}"))
 }
 
 func TestParseSection(t *testing.T) {
-	_ = parseEtymologySection("From {{derived|eng|deu|qqqqq}}, abcd...")
+	fmt.Println(parseEtymologySection("From {{derived|eng|deu|qqqqq}}, abcd..."))
 }
 
 func TestParseSection2(t *testing.T) {
-	_ = parseEtymologySection("First attested in 1664. From {{etyl|la|en}} {{m|la|circuitōsus}}")
+	fmt.Println(parseEtymologySection("First attested in 1664. From {{etyl|la|en}} {{m|la|circuitōsus}}"))
 }
 
 func TestParseSectionParens(t *testing.T) {
-	_ = parseEtymologySection("From {{etyl|frm|en}} {{m|frm|democratie}} (French {{m|fr|démocratie}})")
+	fmt.Println(parseEtymologySection("From {{etyl|frm|en}} {{m|frm|democratie}} (French {{m|fr|démocratie}})"))
 }
 
 func TestParseSection3(t *testing.T) {
-	_ = parseEtymologySection("{{suffix|en|deflate|ion}}")
+	fmt.Println(parseEtymologySection("{{suffix|en|deflate|ion}}"))
 }
 
 func TestParseSection4(t *testing.T) {
 	// We want to ignore bits after the first valid "referencing clause", so we want to ignore " from" on
 	// wards here
-	_ = parseEtymologySection("Via {{etyl|de|cs}} {{m|de|Symptom}}<ref>{{R:Rejzek 2007}}</ref> from {{der|cs|grc|σύμπτωμα||a happening, accident, symptom of disease}}, from stem of {{m|grc|συμπίπτω||Ι befall}}, from {{m|grc|συν-||together}} + {{m|grc|πίπτω||I fall}}. ")
+	fmt.Println(parseEtymologySection("Via {{etyl|de|cs}} {{m|de|Symptom}}<ref>{{R:Rejzek 2007}}</ref> from {{der|cs|grc|σύμπτωμα||a happening, accident, symptom of disease}}, from stem of {{m|grc|συμπίπτω||Ι befall}}, from {{m|grc|συν-||together}} + {{m|grc|πίπτω||I fall}}. "))
 }
 
 func TestParseSection5(t *testing.T) {
-	_ = parseEtymologySection(`{{root|en|ine-pro|*ǵenh₁-}}
+	fmt.Println(parseEtymologySection(`{{root|en|ine-pro|*ǵenh₁-}}
 From {{inh|en|enm|nature}}, {{m|enm|natur}}, borrowed from {{bor|en|fro|nature}}, from 
-`)
+`))
+}
+
+func TestParseSection6(t *testing.T) {
+	fmt.Println(parseEtymologySection(`From {{suffix|en|πάθος|lang1=grc|t1=suffering|y}}`))
 }
