@@ -1,0 +1,179 @@
+aa	Afar	Cushitic	Latn			Yes
+ab	Abkhaz	Abkhaz-Abaza	Cyrl, Geor, Latn			Yes
+ae	Avestan	Central Iranian	Avst, Gujr			
+af	Afrikaans	West Germanic	Latn, Arab		Yes	
+ak	Akan	Central Tano	Latn			
+am	Amharic	Ethiopian Semitic	Ethi			
+an	Aragonese	West Iberian	Latn			
+ar	Arabic	Arabic	Arab, Brai	Modern Standard Arabic, Standard Arabic, Literary Arabic, Classical Arabic		Yes
+as	Assamese	Eastern Indo-Aryan	as-Beng			
+av	Avar	Northeast Caucasian	Cyrl			Yes
+ay	Aymara	Aymaran	Latn			
+az	Azerbaijani	Oghuz	Latn, Cyrl, fa-Arab			
+ba	Bashkir	Kipchak-Bulgar	Cyrl			
+be	Belarusian	East Slavic	Cyrl		Yes	Yes
+bg	Bulgarian	South Slavic	Cyrl			Yes
+bh	Bihari	Eastern Indo-Aryan	Deva			
+bi	Bislama	creole or pidgin	Latn			
+bm	Bambara	East Manding	Latn			
+bn	Bengali	Eastern Indo-Aryan	Beng, Newa			
+bo	Tibetan	Tibetic	Tibt			
+br	Breton	Brythonic	Latn			
+ca	Catalan	Romance	Latn		Yes	
+ce	Chechen	Vainakh	Cyrl			Yes
+ch	Chamorro	Sunda-Sulawesi	Latn			
+co	Corsican	Italo-Dalmatian	Latn			
+cr	Cree	Algonquian	Cans, Latn			
+cs	Czech	West Slavic	Latn		Yes	
+cu	Old Church Slavonic	South Slavic	Cyrs, Glag		Yes	Yes
+cv	Chuvash	Oghur	Cyrl			
+cy	Welsh	Brythonic	Latn		Yes	
+da	Danish	North Germanic	Latn			
+de	German	West Germanic	Latn, Latf		Yes	
+dv	Dhivehi	Insular Indo-Aryan	Thaa			
+dz	Dzongkha	Tibetic	Tibt			
+ee	Ewe	Gbe	Latn			
+el	Greek	Hellenic	Grek, Brai		Yes	
+en	English	West Germanic	Latn, Brai, Shaw, Dsrt		Yes	
+eo	Esperanto	constructed	Latn		Yes	
+es	Spanish	West Iberian	Latn, Brai		Yes	
+et	Estonian	Finnic	Latn			
+eu	Basque	Vasconic	Latn			
+fa	Persian	Southwestern Iranian	fa-Arab			Yes
+ff	Fula	Fula-Wolof	Latn, Adlm			
+fi	Finnish	Finnic	Latn		Yes	Yes
+fj	Fijian	Central-Eastern Oceanic	Latn			
+fo	Faroese	North Germanic	Latn			
+fr	French	Oïl	Latn, Brai		Yes	
+fy	West Frisian	Frisian	Latn		Yes	
+ga	Irish	Goidelic	Latn		Yes	
+gd	Scottish Gaelic	Goidelic	Latn		Yes	
+gl	Galician	West Iberian	Latn		Yes	
+gn	Guaraní	Tupi-Guarani	Latn			
+gu	Gujarati	Western Indo-Aryan	Gujr			
+gv	Manx	Goidelic	Latn		Yes	
+ha	Hausa	West Chadic	Latn, Arab		Yes	Yes
+he	Hebrew	Canaanite	Hebr, Phnx, Brai			Yes
+hi	Hindi	Hindustani	Deva, Kthi, Newa	Hindavi		
+ho	Hiri Motu	creole or pidgin	Latn			
+ht	Haitian Creole	creole or pidgin	Latn			
+hu	Hungarian	Ugric	Latn, Hung		Yes	
+hy	Armenian	Armenian	Armn, Brai		Yes	Yes
+hz	Herero	Southwest Bantu	Latn			
+ia	Interlingua	constructed	Latn			
+id	Indonesian	Malayic	Latn			
+ie	Interlingue	constructed	Latn			
+ig	Igbo	Igboid	Latn			
+ii	Sichuan Yi	Loloish	Yiii			
+ik	Inupiaq	Inuit	Latn			
+io	Ido	constructed	Latn			
+is	Icelandic	North Germanic	Latn			
+it	Italian	Italo-Dalmatian	Latn		Yes	
+iu	Inuktitut	Inuit	Cans, Latn			
+ja	Japanese	Japonic	Jpan, Brai			
+jv	Javanese	Sunda-Sulawesi	Latn, Java			
+ka	Georgian	Georgian-Zan	Geor, Geok, Hebr			Yes
+kg	Kongo	Kongo	Latn			
+ki	Kikuyu	Kikuyu-Kamba	Latn			
+kj	Kwanyama	Ovambo	Latn			
+kk	Kazakh	Kipchak-Nogai	Cyrl, Latn, kk-Arab			
+kl	Greenlandic	Inuit	Latn			
+km	Khmer	Khmeric	Khmr			
+kn	Kannada	Dravidian	Knda			
+ko	Korean	Korean	Kore, Brai			
+kr	Kanuri	Saharan	Latn, Arab		Yes	Yes
+ks	Kashmiri	Dardic	ks-Arab, Deva, Shrd, Latn			
+ku	Kurdish	Northwestern Iranian	Latn, ku-Arab, Armn, Cyrl			
+kw	Cornish	Brythonic	Latn			
+ky	Kyrgyz	Kipchak	Cyrl, Latn, Arab			
+la	Latin	Italic	Latn			Yes
+lb	Luxembourgish	West Germanic	Latn			
+lg	Luganda	Nyoro-Ganda	Latn		Yes	Yes
+li	Limburgish	West Germanic	Latn			
+ln	Lingala	Bangi-Moi	Latn			
+lo	Lao	Southwestern Tai	Laoo		Yes	
+lt	Lithuanian	Baltic	Latn			Yes
+lu	Luba-Katanga	Luba	Latn			
+lv	Latvian	Baltic	Latn			Yes
+mg	Malagasy	East Barito	Latn			
+mh	Marshallese	Micronesian	Latn		Yes	
+mi	Maori	Eastern Polynesian	Latn			
+mk	Macedonian	South Slavic	Cyrl			Yes
+ml	Malayalam	Dravidian	Mlym			
+mn	Mongolian	Mongolic	Cyrl, Mong, Soyo, Zanb			
+mr	Marathi	Southern Indo-Aryan	Deva, Modi			
+ms	Malay	Malayic	Latn, ms-Arab			
+mt	Maltese	Arabic	Latn			
+my	Burmese	Burmish	Mymr		Yes	
+na	Nauruan	Micronesian	Latn			
+nb	Norwegian Bokmål	North Germanic	Latn			
+nd	Northern Ndebele	Nguni	Latn			Yes
+ne	Nepali	Pahari	Deva, Newa			
+ng	Ndonga	Ovambo	Latn			
+nl	Dutch	West Germanic	Latn		Yes	
+nn	Norwegian Nynorsk	North Germanic	Latn			
+no	Norwegian	North Germanic	Latn			
+nr	Southern Ndebele	Nguni	Latn			Yes
+nv	Navajo	Apachean	nv-Latn		Yes	
+ny	Chichewa	Nyasa	Latn		Yes	Yes
+oc	Occitan	Romance	Latn, Hebr		Yes	
+oj	Ojibwe	Algonquian	Cans, Latn		Yes	
+om	Oromo	Cushitic	Latn, Ethi			
+or	Oriya	Eastern Indo-Aryan	Orya			
+os	Ossetian	Scythian	Cyrl, Geor, Latn			Yes
+pa	Punjabi	Punjabi-Lahnda	Guru, pa-Arab			Yes
+pi	Pali	Prakrit	Latn, Brah, Deva, Beng, Sinh, Mymr, Thai, Lana, Laoo, Khmr		Yes	Yes
+pl	Polish	Lechitic	Latn		Yes	
+ps	Pashto	Pathan	ps-Arab			
+pt	Portuguese	West Iberian	Latn, Brai		Yes	
+qu	Quechua	Quechuan	Latn			
+rm	Romansch	Rhaeto-Romance	Latn			
+ro	Romanian	Eastern Romance	Latn, Cyrl		Yes	
+ru	Russian	East Slavic	Cyrl, Brai		Yes	Yes
+rw	Rwanda-Rundi	Great Lakes Bantu	Latn			Yes
+sa	Sanskrit	Old Indo-Aryan	Deva, Bali, as-Beng, Beng, Bhks, Brah, Gran, Gujr, Guru, Java, Khar, Khmr, Knda, Lana, Laoo, Mlym, Mymr, Newa, Orya, Saur, Shrd, Sidd, Sinh, Taml, Telu, Thai, Tibt, Tirh		Yes	Yes
+sc	Sardinian	Romance	Latn			
+sd	Sindhi	Sindhi	sd-Arab, Deva, Sind, Khoj			Yes
+se	Northern Sami	Sami	Latn		Yes	Yes
+sg	Sango	creole or pidgin	Latn			
+sh	Serbo-Croatian	South Slavic	Latn, Cyrl, Glag			Yes
+si	Sinhalese	Insular Indo-Aryan	Sinh			
+sk	Slovak	West Slavic	Latn		Yes	
+sl	Slovene	South Slavic	Latn		Yes	Yes
+sm	Samoan	Nuclear Polynesian	Latn			
+sn	Shona	Shona	Latn			Yes
+so	Somali	Cushitic	Latn, Arab, Osma			Yes
+sq	Albanian	Albanian	Latn, Grek, Elba		Yes	Yes
+ss	Swazi	Nguni	Latn			Yes
+st	Sotho	Sotho-Tswana	Latn			Yes
+su	Sundanese	Malayo-Sumbawan	Latn, Sund			
+sv	Swedish	North Germanic	Latn			
+sw	Swahili	Swahili	Latn, Arab		Yes	
+ta	Tamil	Dravidian	Taml			
+te	Telugu	Dravidian	Telu			
+tg	Tajik	Southwestern Iranian	Cyrl, fa-Arab, Latn		Yes	Yes
+th	Thai	Southwestern Tai	Thai, Brai		Yes	
+ti	Tigrinya	Ethiopian Semitic	Ethi			
+tk	Turkmen	Oghuz	Latn, Cyrl, Arab			Yes
+tl	Tagalog	Philippine	Latn, Tglg			Yes
+tn	Tswana	Sotho-Tswana	Latn			
+to	Tongan	Polynesian	Latn		Yes	Yes
+tr	Turkish	Oghuz	Latn			
+ts	Tsonga	Tswa-Ronga	Latn			
+tt	Tatar	Kipchak-Bulgar	Cyrl, Latn, tt-Arab			
+ty	Tahitian	Eastern Polynesian	Latn			
+ug	Uyghur	Karluk	ug-Arab, Latn, Cyrl			
+uk	Ukrainian	East Slavic	Cyrl			Yes
+ur	Urdu	Hindustani	ur-Arab			Yes
+uz	Uzbek	Karluk	Latn, Cyrl, fa-Arab			
+ve	Venda	Southern Bantu	Latn			
+vi	Vietnamese	Vietic	Latn, Hani		Yes	
+vo	Volapük	constructed	Latn			
+wa	Walloon	Oïl	Latn		Yes	
+wo	Wolof	Fula-Wolof	Latn, Arab			
+xh	Xhosa	Nguni	Latn			Yes
+yi	Yiddish	West Germanic	Hebr		Yes	
+yo	Yoruba	Yoruboid	Latn		Yes	Yes
+za	Zhuang	Tai	Latn, Hani		Yes	
+zh	Chinese	Sinitic	Hani, Brai, Nshu		Yes	
+zu	Zulu	Nguni	Latn			Yes
