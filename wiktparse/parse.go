@@ -199,6 +199,23 @@ func parseTemplate(template string) (refs []reference) {
 
 	var refType referenceType
 	switch components[0] {
+	case "af", "affix", "com", "compound":
+		if len(components) < 3 {
+			return nil
+		}
+
+		var refs []reference
+		for _, comp := range components[2:] {
+			refs = append(refs, reference{
+				refType: refTypeComponent,
+				word: langWord{
+					language: components[1],
+					word:     comp,
+				},
+			})
+		}
+
+		return refs
 	case "pre", "prefix":
 		if len(components) < 4 {
 			return nil
