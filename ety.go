@@ -53,7 +53,6 @@ type Relation int
 
 const (
 	RelationEtymology = iota
-	RelationDerivedFrom
 )
 
 func (e Etymology) Lookup(word Word) Node {

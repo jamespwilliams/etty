@@ -59,7 +59,7 @@ func format(n etymology.Node, indent string, root, lastChild bool) string {
 	sb.WriteString(Magenta(n.Word.Language).String())
 	sb.WriteString(")")
 
-	children := append(n.Etymology, n.DerivedFrom...)
+	children := n.Etymology
 
 	for index, child := range children {
 		childIsLast := index == len(children)-1

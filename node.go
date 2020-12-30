@@ -1,9 +1,8 @@
 package etymology
 
 type Node struct {
-	Word        Word
-	DerivedFrom []Node
-	Etymology   []Node
+	Word      Word
+	Etymology []Node
 }
 
 func contains(nodes []Node, node Node) bool {
