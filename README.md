@@ -1,7 +1,6 @@
 ## etymology
 
-Etymology library for Go, heavily inspired by
-https://github.com/jmsv/ety-python.
+Etymology visualizer, written in Go, heavily inspired by
 
 This is a WIP.
 
@@ -9,9 +8,9 @@ Uses Gerard de Melo's [Etymological Wordnet](http://etym.org/).
 This is quite out of date, though (2013). The wordnet is mostly sourced from
 Wiktionary, which has much more detailed etymology information these days.
 
-### Usage
+### Command-Line
 
-You'll need a copy of de Melo's Wordnet:
+Inspired by https://github.com/jmsv/ety-python. You'll need a wordnet:
 
 ```console
 [jpw@xyz:~] $ wget https://cs.rutgers.edu/~gd343/downloads/etymwn-20130208.zip
@@ -53,10 +52,25 @@ The output is coloured nicely, too:
 
 ![Screenshot of CLI](https://raw.githubusercontent.com/jamespwilliams/etymology/master/_assets/cli.png)
 
-### Future
+### Web Interface
 
-I have the vague idea of making a web interface for this, which accepts a word
-and displays an etymological tree for it.
+You'll need a wordnet, as in the Command-Line section.
 
-Also, it'd be nice to use more up-to-date etymology information, as mentioned
-earlier.
+First, start the API:
+
+```console
+[jpw@xyz:ety] $ go run ./cmd/ety-api/ path/to/wordnet.txt
+```
+
+The web interface itself is just a static HTML file, can be served (for example)
+with Python:
+
+```console
+[jpw@xyz:ety/_www] $ python3 -m http.server
+```
+
+![Screenshot of Web Interface](https://raw.githubusercontent.com/jamespwilliams/etymology/master/_assets/web.png)
+
+### Generating Etymology Wordnet
+
+TODO...
