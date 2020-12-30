@@ -7,22 +7,54 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.js"
     ></script>
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style type="text/css">
       #graph {
-        width: 100%;
-        height: 90vh;
-        border: 1px solid lightgray;
+          width: 100%;
+          height: 85vh;
+          border: 1px solid lightgray;
+      }
+
+      #word-input-form {
+          margin: 10px;
+          width: 90%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      #lang-col {
+          width: 50px;
+      }
+
+      #header {
+          margin: 5px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
       }
     </style>
   </head>
   <body>
-    <form id="word-input-form">
-        Enter word: <input id="word" type="text">
-        Enter language code (default <tt>en</tt>): <input id="lang" type="text">
-        <input type="submit" value="Go">
-    </form>
-    <br/>
-
+    <div id="header">
+        <h3>Etymology Visualizer</h3>
+        <form id="word-input-form">
+            <div class="form-row">
+                <div class="col-auto">
+                    <label class="sr-only" for="word-input">Word</label>
+                    <input type="text" class="form-control form-control-sm mb-2" id="word-input">
+                </div>
+                <div id="lang-col" class="col-auto">
+                    <label class="sr-only" for="lang-input">Language</label>
+                    <input type="text" class="form-control form-control-sm" id="lang-input" placeholder="en">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-sm mb-2">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <div id="graph"></div>
 
     <script type="text/javascript">
@@ -104,8 +136,8 @@
         document.getElementById("word-input-form").addEventListener("submit", function(e) {
             e.preventDefault();
 
-            const word = document.getElementById("word").value;
-            var lang = document.getElementById("lang").value;
+            const word = document.getElementById("word-input").value;
+            var lang = document.getElementById("lang-input").value;
             if (lang === undefined) {
                 lang = "en";
             }
