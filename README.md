@@ -1,8 +1,12 @@
 ## etymology
 
-Etymology dataset scraper and visualizer, written in Go.
+Etymology dataset scraper and visualizer, written in Go. This is WIP.
 
-This is a WIP.
+### Table of Contents
+
+- [Command-Line](#command-line)
+- [Web Interface](#web-interface)
+- [Wordnet Generator](#wordnet-generator)
 
 ### Command-Line
 
@@ -69,7 +73,7 @@ with Python:
 
 ![Screenshot of Web Interface](https://raw.githubusercontent.com/jamespwilliams/etymology/master/_assets/web.png)
 
-### Generating Etymology Wordnet
+### Wordnet Generator
 
 Gerard de Melo's [Etymological Wordnet](http://etym.org/)
 is quite out of date (last updated in 2013). The wordnet is mostly sourced from
