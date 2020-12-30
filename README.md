@@ -1,16 +1,13 @@
 ## etymology
 
-Etymology visualizer, written in Go, heavily inspired by
+Etymology dataset scraper and visualizer, written in Go.
 
 This is a WIP.
 
-Uses Gerard de Melo's [Etymological Wordnet](http://etym.org/).
-This is quite out of date, though (2013). The wordnet is mostly sourced from
-Wiktionary, which has much more detailed etymology information these days.
-
 ### Command-Line
 
-Inspired by https://github.com/jmsv/ety-python. You'll need a wordnet:
+Inspired by https://github.com/jmsv/ety-python. You'll need a wordnet, for
+example Gerard de Melo's [Etymological Wordnet](http://etym.org/):
 
 ```console
 [jpw@xyz:~] $ wget https://cs.rutgers.edu/~gd343/downloads/etymwn-20130208.zip
@@ -73,4 +70,20 @@ with Python:
 
 ### Generating Etymology Wordnet
 
-TODO...
+Gerard de Melo's [Etymological Wordnet](http://etym.org/)
+is quite out of date (last updated in 2013). The wordnet is mostly sourced from
+Wiktionary, which has much more detailed etymology information these days.
+
+The binary in `cmd/wiktionary-parse/` accepts an XML dump of Wiktionary, and
+will output a wordnet similar to de Melo's, which the other binaries in this
+project can then accept.
+
+Something along the lines of the following should work:
+
+```console
+[jpw@xyz:ety] $ wget https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles-multistream.xml.bz2
+[jpw@xyz:ety] $ pv enwiktionary-latest-pages-articles-multistream.xml.bz2 | bzcat | go run ./cmd/wiktionary-parse > wordnet.txt
+```
+
+`wiktionary-parse` attempts to extract etymological information using the
+templates in the Etymology sections of words.
