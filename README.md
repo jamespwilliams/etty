@@ -17,7 +17,8 @@ example Gerard de Melo's [Etymological Wordnet](http://etym.org/):
 Then, for example:
 
 ```console
-[jpw@xyz:~] $ go run github.com/jamespwilliams/etymology/cmd/ety etymwn.tsv psychoneuroendocrinological eng
+[jpw@xyz:~] $ go get github.com/jamespwilliams/etymology/cmd/ety
+[jpw@xyz:~] $ ety etymwn.tsv psychoneuroendocrinological eng
 psychoneuroendocrinological (eng)
 ├── psychoneuroendocrinology (eng)
 │   ├── neuro- (eng)

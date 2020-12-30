@@ -8,6 +8,14 @@ import (
 	"strings"
 )
 
+var relationWhitelist = map[string]struct{}{
+	"rel:etymology":       {},
+	"rel:is_derived_from": {},
+	"rel:inherited":       {},
+	"rel:borrowed":        {},
+	"rel:derived":         {},
+}
+
 type Word struct {
 	Language string
 	Word     string
@@ -24,21 +32,25 @@ func New(data io.Reader) (Etymology, error) {
 	for scanner.Scan() {
 		components := strings.Split(scanner.Text(), "\t")
 
+		if _, ok := relationWhitelist[components[1]]; !ok {
+			continue
+		}
+
 		from := strings.Split(components[0], ":")
 		to := strings.Split(components[2], ":")
 
 		fromWord := Word{
 			Language: from[0],
-			Word:     from[1],
+			Word:     strings.TrimSpace(from[1]),
 		}
 
 		edges[fromWord] = append(edges[fromWord], Word{
 			Language: to[0],
-			Word:     to[1],
+			Word:     strings.TrimSpace(to[1]),
 		})
 	}
 	fmt.Println(edges[Word{
-		Language: "en",
+		Language: "eng",
 		Word:     "aerodynamically",
 	}])
 
