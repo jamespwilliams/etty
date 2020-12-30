@@ -1,0 +1,119 @@
+<html lang="en">
+  <head>
+    <title>Etymology Visualizer</title>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.js"
+    ></script>
+
+    <style type="text/css">
+      #graph {
+        width: 100%;
+        height: 90vh;
+        border: 1px solid lightgray;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="word-input-form">
+        Enter word: <input id="word" type="text">
+        Enter language code (default <tt>en</tt>): <input id="lang" type="text">
+        <input type="submit" value="Go">
+    </form>
+    <br/>
+
+    <div id="graph"></div>
+
+    <script type="text/javascript">
+        function getVisData(etymJson) {
+            let nodes = new Map();
+            let langGroups = new Map();
+            let maxId = 0;
+            let maxGroup = 0;
+            let edges = [];
+
+            // queue of (parentId, node)
+            let queue = [[-1, etymJson]];
+
+            while (queue.length) {      
+                const [parentId, curr] = queue.shift();
+
+                var group = langGroups.get(curr.Word.Language);
+                if (group === undefined) {
+                    maxGroup++;
+                    group = maxGroup;
+                    langGroups.set(curr.Word.Language, group);
+                }
+
+                var currNode = nodes.get(curr.Word);
+                if (currNode === undefined) {
+                    currNode = {id: maxId, label: curr.Word.Word + "\n(" + curr.Word.Language + ")", group: group};
+                    maxId++;
+                    nodes.set(curr.Word, currNode);
+                }
+
+                const id = currNode.id;
+                console.log(parentId, id, curr.Word.Word);
+
+                if (parentId !== -1) {
+                    edges.push({from: parentId, to: id});
+                }
+
+                if (curr.Etymology !== null) {
+                    curr.Etymology.forEach((n) => queue.push([id, n]));
+                }
+            }
+
+            return [Array.from(nodes.values()), edges];
+        }
+        
+        function fetchAndRenderGraph(word, lang) {
+            fetch("http://localhost:3000/etymology?word=" + word + "&lang=" + lang)
+                .then((res) => res.json())
+                .then(getVisData)
+                .then(([nodes, edges]) => {
+                    // create a network
+                    var container = document.getElementById("graph");
+                    var data = {
+                        nodes: new vis.DataSet(nodes),
+                        edges: new vis.DataSet(edges),
+                    };
+                    var options = {
+                        edges: {
+                            arrows: 'to',
+                            shadow: true,
+                        },
+                        nodes: {
+                            shape: 'box',
+                            borderWidth: 2,
+                            shadow: true,
+                        },
+                        physics: {
+                            barnesHut: {
+                                avoidOverlap: 0.2
+                            }
+                        }
+                    };
+                    var network = new vis.Network(container, data, options);
+
+                })
+                .catch(err => {throw err});
+        }
+
+        document.getElementById("word-input-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const word = document.getElementById("word").value;
+            var lang = document.getElementById("lang").value;
+            if (lang === undefined) {
+                lang = "en";
+            }
+
+            fetchAndRenderGraph(word, lang);
+        });
+
+        fetchAndRenderGraph("antidisestablishmentarianism", "en");
+    </script>
+  </body>
+</html>
