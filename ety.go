@@ -14,6 +14,9 @@ var relationWhitelist = map[string]struct{}{
 	"rel:inherited":       {},
 	"rel:borrowed":        {},
 	"rel:derived":         {},
+	"rel:prefix":          {},
+	"rel:suffix":          {},
+	"rel:component":       {},
 }
 
 type Word struct {
