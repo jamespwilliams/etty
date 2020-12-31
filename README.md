@@ -10,8 +10,8 @@ Etymology dataset scraper and visualizer, written in Go. This is WIP.
 
 ### Command-Line
 
-Inspired by https://github.com/jmsv/ety-python. You'll need a wordnet, for
-example Gerard de Melo's [Etymological Wordnet](http://etym.org/):
+Inspired by https://github.com/jmsv/ety-python. You'll need a wordnet in TSV
+format, for example Gerard de Melo's [Etymological Wordnet](http://etym.org/):
 
 ```console
 [jpw@xyz:~] $ wget https://cs.rutgers.edu/~gd343/downloads/etymwn-20130208.zip
@@ -56,12 +56,12 @@ The output is coloured nicely, too:
 
 ### Web Interface
 
-You'll need a wordnet, as in the Command-Line section.
+You'll need a wordnet in TSV format, as mentioned in the Command-Line section.
 
 First, start the API:
 
 ```console
-[jpw@xyz:ety] $ go run ./cmd/ety-api/ path/to/wordnet.txt
+[jpw@xyz:ety] $ go run ./cmd/ety-api/ path/to/wordnet.txt tcp ':3000'
 ```
 
 The web interface itself is just a static HTML file, can be served (for example)

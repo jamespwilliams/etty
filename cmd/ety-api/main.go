@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 
@@ -11,12 +12,12 @@ import (
 )
 
 func main() {
-	if err := run(os.Args[1]); err != nil {
+	if err := run(os.Args[1], os.Args[2], os.Args[3]); err != nil {
 		log.Fatal("ety:", err)
 	}
 }
 
-func run(wordnetPath string) error {
+func run(wordnetPath, network, address string) error {
 	wordnet, err := os.Open(wordnetPath)
 	if err != nil {
 		return fmt.Errorf("failed to open wordnet: %v", err)
@@ -29,5 +30,10 @@ func run(wordnetPath string) error {
 
 	s := api.NewServer(ety)
 
-	return http.ListenAndServe(":3000", s)
+	l, err := net.Listen(network, address)
+	if err != nil {
+		return fmt.Errorf("failed to create listener: %v", err)
+	}
+
+	return http.Serve(l, s)
 }
