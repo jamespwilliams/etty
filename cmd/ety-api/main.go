@@ -9,15 +9,21 @@ import (
 
 	"github.com/jamespwilliams/etymology"
 	"github.com/jamespwilliams/etymology/api"
+	"go.uber.org/zap"
 )
 
 func main() {
-	if err := run(os.Args[1], os.Args[2], os.Args[3]); err != nil {
-		log.Fatal("ety:", err)
+	logger, err := zap.NewDevelopment()
+	if err != nil {
+		log.Fatal("ety-api: failed to initialise logger", err)
+	}
+
+	if err := run(logger, os.Args[1], os.Args[2], os.Args[3]); err != nil {
+		logger.Fatal("ety-api: fatal error", zap.Error(err))
 	}
 }
 
-func run(wordnetPath, network, address string) error {
+func run(logger *zap.Logger, wordnetPath, network, address string) error {
 	wordnet, err := os.Open(wordnetPath)
 	if err != nil {
 		return fmt.Errorf("failed to open wordnet: %v", err)
@@ -28,7 +34,7 @@ func run(wordnetPath, network, address string) error {
 		return fmt.Errorf("failed to build etymology tree from wordnet: %v", err)
 	}
 
-	s := api.NewServer(ety)
+	s := api.NewServer(logger, ety)
 
 	l, err := net.Listen(network, address)
 	if err != nil {

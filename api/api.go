@@ -7,17 +7,20 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/jamespwilliams/etymology"
+	"go.uber.org/zap"
 )
 
 type Server struct {
 	ety    etymology.Etymology
 	router chi.Router
+	logger *zap.Logger
 }
 
-func NewServer(ety etymology.Etymology) Server {
+func NewServer(logger *zap.Logger, ety etymology.Etymology) Server {
 	s := Server{
 		ety:    ety,
 		router: chi.NewRouter(),
+		logger: logger,
 	}
 	s.routes()
 	return s
@@ -51,7 +54,7 @@ func (s *Server) handleEtymology() http.HandlerFunc {
 		})
 
 		if err := json.NewEncoder(w).Encode(node); err != nil {
-			fmt.Println(err)
+			s.logger.Error("failed to encode response", zap.Error(err))
 			return
 		}
 	}
