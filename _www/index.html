@@ -6,43 +6,100 @@
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.js"
     ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css"
+    integrity="sha512-NJXM8vzWgDcBy9SCUTJXYnNO43sZV3pfLWWZMFTuCtEUIOcznk+AMpH6N3XruxavYfMeMmjrzDMEQ6psRh/6Hw=="
+    crossorigin="anonymous" />
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style type="text/css">
-      #graph {
-          width: 100%;
-          height: 85vh;
-          border: 1px solid lightgray;
-      }
+        body {
+            display: flex;
+            flex-direction: row;
+        }
 
-      #word-input-form {
-          margin: 10px;
-          width: 90%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }
+        #graph {
+            width: 100%;
+            height: 100vh;
+            border: 1px solid lightgray;
+        }
 
-      #lang-input {
-          width: 40px;
-      }
+        #word-input-form > .form-group {
+            margin-bottom: 0px;
+        }
 
-      #header {
-          margin: 5px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
+        #word-input-form > .form-group > .input-group {
+            justify-content: center;
+        }
+
+        #go-btn {
+            margin-left: 10px;
+            width: 50px;
+        }
+
+        #lang-input {
+            width: 40px;
+            max-width: 40px;
+        }
+
+        #sidebar {
+            padding-top: 20px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #eee;
+        }
+
+        #sidebar > h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #go-lang-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .input-group-text {
+            background-color: #fff !important;
+            font-weight: bold;
+        }
+
+        #sidebar-bottom {
+            border-top: 1px solid lightgrey;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 20px;
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #sidebar-bottom > h4 {
+            text-align: center
+        }
+
+        #sidebar-bottom > p {
+            font-size: 15px;
+        }
+
+        .vis-up, .vis-down, .vis-left, .vis-right {
+            display: none !important;
+        }
     </style>
   </head>
   <body>
-    <div id="header">
-        <h3>Etymology Visualizer</h3>
+    <div id="sidebar">
+        <div id="sidebar-top">
+            <h3>Etymology Visualizer</h3>
 
-        <form id="word-input-form">
-            <div class="form-row">
-                <div class="col-auto">
+            <form id="word-input-form">
+                <div class="form-group">
                     <label class="sr-only" for="lang-input">Language</label>
                     <div class="input-group input-group-sm mb-2">
                         <div class="input-group-prepend">
@@ -51,25 +108,44 @@
                         <input type="text" class="form-control form-control-sm" id="word-input" placeholder="">
                     </div>
                 </div>
-                <div id="lang-col" class="col-auto">
-                    <label class="sr-only" for="lang-input">Language</label>
-                    <div class="input-group input-group-sm mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <a href="https://en.wiktionary.org/wiki/Wiktionary:List_of_languages"
-                                    target="_blank" rel="noreferrer">Language Code</a>
+                <div id="go-lang-container" class="form-group">
+                    <div id="lang-input-container">
+                        <label class="sr-only" for="lang-input">Language</label>
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Language Code</div>
                             </div>
+                            <input type="text" class="form-control form-control-sm" id="lang-input" placeholder="en" value="en">
                         </div>
-                        <input type="text" class="form-control form-control-sm" id="lang-input" placeholder="en"
-                                     value="en">
+                    </div>
+                    <div id="go-btn-container">
+                        <button id="go-btn" type="submit" class="btn btn-primary btn-sm">Go</button>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary btn-sm mb-2">Submit</button>
-                </div>
-            </div>
-        </form>
-
+            </form>
+        </div>
+        <div id="sidebar-bottom">
+            <h4>About</h4>
+            <p>
+                This site allows the visualisation of the etymological roots of words.
+            </p>
+            <p>
+                The data used is scraped from Wiktionary in a relatively naive way, so it's possible there are mistakes.
+                If in doubt, check the source - clicking on a node will open its definition in Wiktionary.
+            </p>
+            <p>
+                A list of language codes which this site will accept can be found
+                <a href="https://en.wiktionary.org/wiki/Wiktionary:List_of_languages">here</a>.
+            </p>
+            <p>
+                Drag the graph to move around, and use the scroll wheel or the buttons in the bottom-right to scroll.
+            </p>
+            <p>
+                All of the code behind this site is freely available <a
+                    href="https://github.com/jamespwilliams/etymology">here</a>.
+                If you like the site, you can leave a star on the repo.
+            </p>
+        </div>
     </div>
 
     <div id="graph"></div>
@@ -148,7 +224,10 @@
                             barnesHut: {
                                 avoidOverlap: 0.2
                             }
-                        }
+                        },
+                        interaction: {
+                            navigationButtons: true,
+                        },
                     };
                     var network = new vis.Network(container, data, options);
                     
@@ -180,5 +259,7 @@
 
         fetchAndRenderGraph("antidisestablishmentarianism", "en");
     </script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
