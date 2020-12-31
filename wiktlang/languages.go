@@ -2,6 +2,7 @@ package wiktlang
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"strings"
 )
@@ -11,7 +12,7 @@ type Languages struct {
 	threeFromName map[string]string
 }
 
-func New(twos io.Reader, threes io.Reader) Languages {
+func New(twos io.Reader, threes io.Reader) (Languages, error) {
 	languages := Languages{
 		twoFromName:   make(map[string]string),
 		threeFromName: make(map[string]string),
@@ -24,7 +25,9 @@ func New(twos io.Reader, threes io.Reader) Languages {
 		languages.twoFromName[comps[1]] = comps[0]
 	}
 
-	// TODO check scanner err
+	if err := scanner.Err(); err != nil {
+		return Languages{}, fmt.Errorf("failed to scan list of two-letter language codes: %w", err)
+	}
 
 	scanner = bufio.NewScanner(threes)
 	for scanner.Scan() {
@@ -33,9 +36,11 @@ func New(twos io.Reader, threes io.Reader) Languages {
 		languages.threeFromName[comps[1]] = comps[0]
 	}
 
-	// TODO check scanner err
+	if err := scanner.Err(); err != nil {
+		return Languages{}, fmt.Errorf("failed to scan list of three-letter language codes: %w", err)
+	}
 
-	return languages
+	return languages, nil
 }
 
 func (l Languages) CodeFromName(name string) string {

@@ -25,6 +25,10 @@ func run() error {
 		return err
 	}
 
-	languages := wiktlang.New(twos, threes)
+	languages, err := wiktlang.New(twos, threes)
+	if err != nil {
+		return err
+	}
+
 	return wiktparse.ParseDump(os.Stdin, os.Stdout, languages)
 }

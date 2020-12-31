@@ -109,14 +109,6 @@ func parseEtymologySection(section string) []reference {
 		containedTemplate bool
 	)
 
-	// TODO: we also want to ignore empty templates (e.g: {{inh|sco|enm|-}} should _not_ be treated as a template)
-
-	// maybe it'd be useful to extract a list of templates and their punctuation. The word "From" also seems important.
-	// the first valid template seems very likely to be the correct one. the only complication is when there's a "+" or
-	// an "or" separating two (or more) templates
-	//
-	// I think if we encounter a comma after a valid template, we can just stop there.
-
 	section = rootTemplateRegex.ReplaceAllString(section, "")
 	section = imgTemplateRegex.ReplaceAllString(section, "")
 
@@ -147,7 +139,6 @@ outer:
 		return nil
 	}
 
-	// TODO: Remove the bits in parentheses:
 	if endIndex > len(section) {
 		println("endIndex > len(section), hm... section=" + section)
 		return nil
