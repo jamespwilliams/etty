@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/jamespwilliams/etymology/wiktlang"
+	"go.uber.org/zap"
 )
 
 type textElem struct {
@@ -16,7 +17,7 @@ type textElem struct {
 
 var titleRemovalRegex = regexp.MustCompile(`Reconstruction:[^:]*/`)
 
-func ParseDump(dump io.Reader, out io.Writer, languages wiktlang.Languages) error {
+func ParseDump(log *zap.Logger, dump io.Reader, out io.Writer, languages wiktlang.Languages) error {
 	var currentTitle string
 
 	d := xml.NewDecoder(dump)
@@ -44,7 +45,7 @@ func ParseDump(dump io.Reader, out io.Writer, languages wiktlang.Languages) erro
 					return fmt.Errorf("error decoding text: %w", err)
 				}
 
-				parseTextTag(out, currentTitle, text.Data, languages)
+				parseTextTag(log, out, currentTitle, text.Data, languages)
 			}
 		}
 	}
@@ -52,7 +53,7 @@ func ParseDump(dump io.Reader, out io.Writer, languages wiktlang.Languages) erro
 	return nil
 }
 
-func parseTextTag(out io.Writer, title, text string, languages wiktlang.Languages) {
+func parseTextTag(log *zap.Logger, out io.Writer, title, text string, languages wiktlang.Languages) {
 	var (
 		currentLanguage    string
 		inEtymologySection bool
@@ -81,12 +82,18 @@ func parseTextTag(out io.Writer, title, text string, languages wiktlang.Language
 		}
 
 		if inEtymologySection {
-			sections[languages.CodeFromName(currentLanguage)] += line + "\n"
+			languageCode, ok := languages.CodeFromName(currentLanguage)
+			if !ok {
+				log.Debug("couldn't find code for language", zap.String("language", currentLanguage))
+				continue
+			}
+
+			sections[languageCode] += line + "\n"
 		}
 	}
 
 	for lang, section := range sections {
-		refs := parseEtymologySection(section)
+		refs := parseEtymologySection(log, section)
 		for _, ref := range unique(refs) {
 			fmt.Fprintf(out, "%v:%v\trel:%s\t%v:%v\n", lang, title, ref.refType, ref.word.language, ref.word.word)
 		}
@@ -100,7 +107,7 @@ var (
 	templatesRegex    = regexp.MustCompile(`\{\{[^}]*\}\}`)
 )
 
-func parseEtymologySection(section string) []reference {
+func parseEtymologySection(log *zap.Logger, section string) []reference {
 	// Walk the section to try and find the meaningful bit:
 	var (
 		templateCount     int
@@ -140,7 +147,7 @@ outer:
 	}
 
 	if endIndex > len(section) {
-		println("endIndex > len(section), hm... section=" + section)
+		log.Debug("endIndex > len(section) in parseEtymologySection, returning nil")
 		return nil
 	}
 
@@ -149,14 +156,14 @@ outer:
 
 	var refs []reference
 	for _, template := range templatesRegex.FindAllString(section, -1) {
-		refs = append(refs, parseTemplate(template)...)
+		refs = append(refs, parseTemplate(log, template)...)
 	}
 
 	return refs
 }
 
 // parseTemplate takes a template and returns a list of references which that template makes
-func parseTemplate(template string) (refs []reference) {
+func parseTemplate(log *zap.Logger, template string) (refs []reference) {
 	defer func() {
 		// TODO: clean this up:
 		var res []reference
@@ -184,7 +191,6 @@ func parseTemplate(template string) (refs []reference) {
 	}
 
 	if len(components) == 0 {
-		println("len(components) was 0?")
 		return nil
 	}
 

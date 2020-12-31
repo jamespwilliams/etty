@@ -43,15 +43,14 @@ func New(twos io.Reader, threes io.Reader) (Languages, error) {
 	return languages, nil
 }
 
-func (l Languages) CodeFromName(name string) string {
+func (l Languages) CodeFromName(name string) (string, bool) {
 	if code, ok := l.twoFromName[name]; ok {
-		return code
+		return code, true
 	}
 
 	if code, ok := l.threeFromName[name]; ok {
-		return code
+		return code, true
 	}
 
-	println("failed to find code for name: " + name)
-	return ""
+	return "", false
 }
