@@ -24,8 +24,8 @@
           justify-content: center;
       }
 
-      #lang-col {
-          width: 50px;
+      #lang-input {
+          width: 40px;
       }
 
       #header {
@@ -39,22 +39,39 @@
   <body>
     <div id="header">
         <h3>Etymology Visualizer</h3>
+
         <form id="word-input-form">
             <div class="form-row">
                 <div class="col-auto">
-                    <label class="sr-only" for="word-input">Word</label>
-                    <input type="text" class="form-control form-control-sm mb-2" id="word-input">
+                    <label class="sr-only" for="lang-input">Language</label>
+                    <div class="input-group input-group-sm mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Word</div>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" id="word-input" placeholder="">
+                    </div>
                 </div>
                 <div id="lang-col" class="col-auto">
                     <label class="sr-only" for="lang-input">Language</label>
-                    <input type="text" class="form-control form-control-sm" id="lang-input" placeholder="en">
+                    <div class="input-group input-group-sm mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <a href="https://en.wiktionary.org/wiki/Wiktionary:List_of_languages"
+                                    target="_blank" rel="noreferrer">Language Code</a>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" id="lang-input" placeholder="en"
+                                     value="en">
+                    </div>
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary btn-sm mb-2">Submit</button>
                 </div>
             </div>
         </form>
+
     </div>
+
     <div id="graph"></div>
 
     <script type="text/javascript">
@@ -80,14 +97,17 @@
 
                 var currNode = nodes.get(curr.Word);
                 if (currNode === undefined) {
-                    currNode = {id: maxId, label: curr.Word.Word + "\n(" + curr.Word.Language + ")", group: group};
+                    currNode = {
+                        id: maxId,
+                        label: curr.Word.Word + "\n(" + curr.Word.Language + ")",
+                        group: group,
+                        word: curr.Word.Word,
+                    };
                     maxId++;
                     nodes.set(curr.Word, currNode);
                 }
 
                 const id = currNode.id;
-                console.log(parentId, id, curr.Word.Word);
-
                 if (parentId !== -1) {
                     edges.push({from: parentId, to: id});
                 }
@@ -105,11 +125,14 @@
                 .then((res) => res.json())
                 .then(getVisData)
                 .then(([nodes, edges]) => {
+                    nodes = new vis.DataSet(nodes);
+                    edges = new vis.DataSet(edges);
+
                     // create a network
                     var container = document.getElementById("graph");
                     var data = {
-                        nodes: new vis.DataSet(nodes),
-                        edges: new vis.DataSet(edges),
+                        nodes,
+                        edges,
                     };
                     var options = {
                         edges: {
@@ -128,6 +151,16 @@
                         }
                     };
                     var network = new vis.Network(container, data, options);
+                    
+                    network.on('click', function(properties) {
+                        var ids = properties.nodes;
+                        var clickedNodes = nodes.get(ids);
+                        if (clickedNodes.length !== 1) {
+                            return;
+                        }
+
+                        window.open("https://en.wiktionary.org/wiki/" + clickedNodes[0].word);
+                    });
 
                 })
                 .catch(err => {throw err});
