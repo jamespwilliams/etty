@@ -36,14 +36,14 @@ psychoneuroendocrinological (eng)
 │       └── -ology (eng)
 └── -ical (eng)
 
-[jpw@xyz:~] $ go run github.com/jamespwilliams/etymology/cmd/ety etymwn.tsv microgyfrifiadur cym
+[jpw@xyz:~] $ ety etymwn.tsv microgyfrifiadur cym
 microgyfrifiadur (cym)
 ├── micro- (cym)
 └── cyfrifiadur (cym)
     ├── cyfrif (cym)
         └── -adur (cym)
 
-[jpw@xyz:~] $ go run github.com/jamespwilliams/etymology/cmd/ety etymwn.tsv 'ალერსიანი' kat
+[jpw@xyz:~] $ ety etymwn.tsv 'ალერსიანი' kat
 ალერსიანი (kat)
 ├── ალერსი (kat)
 │   └── աղերս (xcl)
