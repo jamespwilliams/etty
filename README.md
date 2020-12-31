@@ -2,6 +2,8 @@
 
 Etymology dataset scraper and visualizer, written in Go. This is WIP.
 
+![Screenshot of Web Interface](https://raw.githubusercontent.com/jamespwilliams/etymology/master/_assets/web.png)
+
 ### Table of Contents
 
 - [Command-Line](#command-line)
@@ -70,8 +72,6 @@ with Python:
 ```console
 [jpw@xyz:ety/_www] $ python3 -m http.server
 ```
-
-![Screenshot of Web Interface](https://raw.githubusercontent.com/jamespwilliams/etymology/master/_assets/web.png)
 
 ### Wordnet Generator
 
