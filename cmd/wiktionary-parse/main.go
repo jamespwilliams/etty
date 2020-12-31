@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -11,17 +10,17 @@ import (
 )
 
 func main() {
-	if err := run(); err != nil {
-		log.Fatal(err)
+	logger, err := zap.NewDevelopment()
+	if err != nil {
+		log.Fatal("wiktionary-parse: failed to initialize logger", err)
+	}
+
+	if err := run(logger); err != nil {
+		logger.Fatal("wiktionary-parse: fatal error", zap.Error(err))
 	}
 }
 
-func run() error {
-	logger, err := zap.NewDevelopment()
-	if err != nil {
-		return fmt.Errorf("failed to initialize logger: %w", err)
-	}
-
+func run(logger *zap.Logger) error {
 	twos, err := os.Open("wiktlang/langs_2.txt")
 	if err != nil {
 		return err
