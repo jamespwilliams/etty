@@ -52,10 +52,6 @@ func New(data io.Reader) (Etymology, error) {
 			Word:     strings.TrimSpace(to[1]),
 		})
 	}
-	fmt.Println(edges[Word{
-		Language: "eng",
-		Word:     "aerodynamically",
-	}])
 
 	if err := scanner.Err(); err != nil {
 		return Etymology{}, fmt.Errorf("failed to scan file: %w", err)
