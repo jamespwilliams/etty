@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/jamespwilliams/etymology/wiktlang"
-	"github.com/jamespwilliams/etymology/wiktparse"
+	"github.com/jamespwilliams/etty/wiktlang"
+	"github.com/jamespwilliams/etty/wiktparse"
 	"go.uber.org/zap"
 )
 

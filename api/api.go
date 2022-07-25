@@ -6,19 +6,19 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/jamespwilliams/etymology"
+	"github.com/jamespwilliams/etty"
 	"go.uber.org/zap"
 )
 
 type Server struct {
-	ety    etymology.Etymology
+	etty   etty.Etymology
 	router chi.Router
 	logger *zap.Logger
 }
 
-func NewServer(logger *zap.Logger, ety etymology.Etymology) Server {
+func NewServer(logger *zap.Logger, etty etty.Etymology) Server {
 	s := Server{
-		ety:    ety,
+		etty:   etty,
 		router: chi.NewRouter(),
 		logger: logger,
 	}
@@ -48,7 +48,7 @@ func (s *Server) handleEtymology() http.HandlerFunc {
 			lang = "en"
 		}
 
-		node := s.ety.Lookup(etymology.Word{
+		node := s.etty.Lookup(etty.Word{
 			Word:     word,
 			Language: lang,
 		})

@@ -1,4 +1,4 @@
-package etymology
+package etty
 
 import (
 	"bufio"

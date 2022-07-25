@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jamespwilliams/etymology"
+	"github.com/jamespwilliams/etty"
 	. "github.com/logrusorgru/aurora"
 )
 
@@ -17,7 +17,7 @@ func main() {
 	}
 
 	if err := run(os.Args[1], os.Args[2], lang); err != nil {
-		log.Fatal("ety:", err)
+		log.Fatal("etty:", err)
 	}
 }
 
@@ -27,22 +27,22 @@ func run(wordnetPath, word, lang string) error {
 		return fmt.Errorf("failed to open wordnet: %v", err)
 	}
 
-	ety, err := etymology.New(wordnet)
+	tree, err := etty.New(wordnet)
 	if err != nil {
-		return fmt.Errorf("failed to build etymology tree from wordnet: %v", err)
+		return fmt.Errorf("failed to build etty tree from wordnet: %v", err)
 	}
 
-	n := ety.Lookup(etymology.Word{Word: word, Language: lang})
-	fmt.Println(formatRoot(n))
+	node := tree.Lookup(etty.Word{Word: word, Language: lang})
+	fmt.Println(formatRoot(node))
 
 	return nil
 }
 
-func formatRoot(n etymology.Node) string {
+func formatRoot(n etty.Node) string {
 	return format(n, "", true, true)
 }
 
-func format(n etymology.Node, indent string, root, lastChild bool) string {
+func format(n etty.Node, indent string, root, lastChild bool) string {
 	var sb strings.Builder
 
 	if !root {

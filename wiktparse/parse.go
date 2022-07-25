@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/jamespwilliams/etymology/wiktlang"
+	"github.com/jamespwilliams/etty/wiktlang"
 	"go.uber.org/zap"
 )
 

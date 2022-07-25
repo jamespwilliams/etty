@@ -1,8 +1,8 @@
-## etymology
+## etty
 
 Etymology dataset scraper and visualizer, written in Go. This is WIP.
 
-![Screenshot of Web Interface](https://raw.githubusercontent.com/jamespwilliams/etymology/master/_assets/web.png)
+![Screenshot of Web Interface](https://raw.githubusercontent.com/jamespwilliams/etty/master/_assets/web.png)
 
 ### Table of Contents
 
@@ -23,8 +23,8 @@ format, for example Gerard de Melo's [Etymological Wordnet](http://etym.org/):
 Then, for example:
 
 ```console
-[jpw@xyz:~] $ go get github.com/jamespwilliams/etymology/cmd/ety
-[jpw@xyz:~] $ ety etymwn.tsv psychoneuroendocrinological eng
+[jpw@xyz:~] $ go get github.com/jamespwilliams/etty/cmd/etty
+[jpw@xyz:~] $ etty etymwn.tsv psychoneuroendocrinological eng
 psychoneuroendocrinological (eng)
 ├── psychoneuroendocrinology (eng)
 │   ├── neuro- (eng)
@@ -38,14 +38,14 @@ psychoneuroendocrinological (eng)
 │       └── -ology (eng)
 └── -ical (eng)
 
-[jpw@xyz:~] $ ety etymwn.tsv microgyfrifiadur cym
+[jpw@xyz:~] $ etty etymwn.tsv microgyfrifiadur cym
 microgyfrifiadur (cym)
 ├── micro- (cym)
 └── cyfrifiadur (cym)
     ├── cyfrif (cym)
         └── -adur (cym)
 
-[jpw@xyz:~] $ ety etymwn.tsv 'ალერსიანი' kat
+[jpw@xyz:~] $ etty etymwn.tsv 'ალერსიანი' kat
 ალერსიანი (kat)
 ├── ალერსი (kat)
 │   └── աղերս (xcl)
@@ -54,7 +54,7 @@ microgyfrifiadur (cym)
 
 The output is coloured nicely, too:
 
-![Screenshot of CLI](https://raw.githubusercontent.com/jamespwilliams/etymology/master/_assets/cli.png)
+![Screenshot of CLI](https://raw.githubusercontent.com/jamespwilliams/etty/master/_assets/cli.png)
 
 ### Web Interface
 
@@ -63,14 +63,14 @@ You'll need a wordnet in TSV format, as mentioned in the Command-Line section.
 First, start the API:
 
 ```console
-[jpw@xyz:ety] $ go run ./cmd/ety-api/ path/to/wordnet.txt tcp ':3000'
+[jpw@xyz:etty] $ go run ./cmd/etty-api/ path/to/wordnet.txt tcp ':3000'
 ```
 
 The web interface itself is just a static HTML file, can be served (for example)
 with Python:
 
 ```console
-[jpw@xyz:ety/_www] $ python3 -m http.server
+[jpw@xyz:etty/_www] $ python3 -m http.server
 ```
 
 ### Wordnet Generator
@@ -86,8 +86,8 @@ project can then accept.
 Something along the lines of the following should work:
 
 ```console
-[jpw@xyz:ety] $ wget https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles-multistream.xml.bz2
-[jpw@xyz:ety] $ pv enwiktionary-latest-pages-articles-multistream.xml.bz2 | bzcat | go run ./cmd/wiktionary-parse > wordnet.txt
+[jpw@xyz:etty] $ wget https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles-multistream.xml.bz2
+[jpw@xyz:etty] $ pv enwiktionary-latest-pages-articles-multistream.xml.bz2 | bzcat | go run ./cmd/wiktionary-parse > wordnet.txt
 ```
 
 `wiktionary-parse` attempts to extract etymological information using the

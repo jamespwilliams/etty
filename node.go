@@ -1,4 +1,4 @@
-package etymology
+package etty
 
 type Node struct {
 	Word      Word

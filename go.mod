@@ -1,4 +1,4 @@
-module github.com/jamespwilliams/etymology
+module github.com/jamespwilliams/etty
 
 go 1.15
 
